@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ByteLab Payment</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;display:grid;place-items:center;
+ padding:20px;background:#080d17;color:#fff;
+ font-family:Tahoma,Arial,sans-serif;
+}
+.card{
+ width:100%;max-width:430px;padding:27px;
+ border-radius:25px;
+ background:linear-gradient(145deg,#172c43,#0b1422 65%,#102b40);
+ border:1px solid #38d9ff55;
+ box-shadow:0 20px 60px #0009,0 0 30px #168cff18;
+ position:relative;overflow:hidden;
+}
+.card:before{
+ content:"";position:absolute;width:260px;height:260px;
+ border:1px solid #38d9ff22;border-radius:50%;
+ top:-150px;left:-100px;
+ box-shadow:0 0 0 25px #38d9ff08,0 0 0 50px #38d9ff05;
+}
+.content{position:relative;z-index:1}
+.header{display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{
+ width:46px;height:46px;border-radius:14px;
+ display:grid;place-items:center;
+ background:linear-gradient(135deg,#54e4ff,#397bff);
+ color:#06111d;font-size:25px;font-weight:900;
+}
+.name{font-size:21px;font-weight:bold;letter-spacing:1px}
+.sub{font-size:9px;color:#91a9c4;letter-spacing:2px;margin-top:5px}
+.tag{font-size:10px;color:#54e4ff;border:1px solid #54e4ff55;padding:7px 10px;border-radius:20px}
+.title{color:#91a9c4;font-size:11px;margin-top:32px}
+.number{
+ direction:ltr;text-align:left;font-size:25px;
+ font-weight:bold;letter-spacing:2px;margin:13px 0 27px;
+ white-space:nowrap;
+}
+.line{height:1px;background:#ffffff20;margin-bottom:22px}
+.row{
+ display:flex;justify-content:space-between;
+ align-items:center;gap:10px;margin:17px 0;
+}
+.info{min-width:0}
+.label{font-size:10px;color:#8da5bf;margin-bottom:7px}
+.value{font-size:13px;font-weight:bold;overflow-wrap:anywhere}
+.ltr{direction:ltr;text-align:left}
+button{
+ border:1px solid #38d9ff66;background:#103047;
+ color:#bcefff;border-radius:9px;padding:9px 12px;
+ font-size:10px;cursor:pointer;font-family:inherit;
+ white-space:nowrap;
+}
+button:hover{background:#174663}
+.footer{
+ border-top:1px solid #ffffff20;padding-top:17px;
+ margin-top:23px;display:flex;justify-content:space-between;
+ color:#829bb5;font-size:9px;letter-spacing:1px;
+}
+.footer strong{color:#54e4ff;font-size:13px}
+</style>
+</head>
+<body>
+
+<div class="card">
+<div class="content">
+
+<div class="header">
+ <div class="brand">
+  <div class="logo">B</div>
+  <div>
+   <div class="name">ByteLab</div>
+   <div class="sub">DIGITAL SERVICES</div>
+  </div>
+ </div>
+ <div class="tag">PAYMENT</div>
+</div>
+
+<div class="title">شماره کارت بانکی</div>
+<div class="number" id="cardNumber"></div>
+
+<div class="line"></div>
+
+<div class="row">
+ <div class="info">
+  <div class="label">نام صاحب حساب</div>
+  <div class="value" id="owner"></div>
+ </div>
+ <button onclick="copyData('owner')">کپی</button>
+</div>
+
+<div class="row">
+ <div class="info">
+  <div class="label">شماره شبا</div>
+  <div class="value ltr" id="sheba"></div>
+ </div>
+ <button onclick="copyData('sheba')">کپی شبا</button>
+</div>
+
+<div class="footer">
+ <span>SECURE DIGITAL PAYMENT</span>
+ <strong>ByteLab.</strong>
+</div>
+
+</div>
+</div>
+
+<script>
+// اطلاعات بانکی خودت را اینجا وارد کن
+const PAYMENT = {
+ card: "6037-0000-0000-0000",
+ owner: "نام و نام خانوادگی",
+ sheba: "IR000000000000000000000000"
+};
+
+const card = PAYMENT.card.replace(/\D/g,"").replace(/(.{4})/g,"$1 ").trim();
+
+document.getElementById("cardNumber").textContent = card;
+document.getElementById("owner").textContent = PAYMENT.owner;
+document.getElementById("sheba").textContent = PAYMENT.sheba;
+
+async function copyData(id){
+ const value = id === "cardNumber"
+  ? PAYMENT.card.replace(/\D/g,"")
+  : document.getElementById(id).textContent;
+
+ try{
+  await navigator.clipboard.writeText(value);
+  alert("با موفقیت کپی شد!");
+ }catch(e){
+  alert("امکان کپی خودکار وجود ندارد.");
+ }
+}
+</script>
+
+</body>
+</html>
