@@ -5,152 +5,276 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ByteLab Payment</title>
+
 <style>
 *{box-sizing:border-box}
+
 body{
- margin:0;min-height:100vh;display:grid;place-items:center;
- padding:20px;background:#080d17;color:#fff;
+ margin:0;
+ min-height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ padding:20px;
+ background:#080d17;
  font-family:Tahoma,Arial,sans-serif;
+ color:white;
 }
+
 .card{
- width:100%;max-width:430px;padding:27px;
- border-radius:25px;
- background:linear-gradient(145deg,#172c43,#0b1422 65%,#102b40);
+ width:100%;
+ max-width:450px;
+ padding:27px;
+ border-radius:24px;
+ background:linear-gradient(145deg,#1b3048,#0b1524 65%,#102b40);
  border:1px solid #38d9ff55;
- box-shadow:0 20px 60px #0009,0 0 30px #168cff18;
- position:relative;overflow:hidden;
+ box-shadow:0 20px 60px #0009;
+ position:relative;
+ overflow:hidden;
 }
+
 .card:before{
- content:"";position:absolute;width:260px;height:260px;
- border:1px solid #38d9ff22;border-radius:50%;
- top:-150px;left:-100px;
- box-shadow:0 0 0 25px #38d9ff08,0 0 0 50px #38d9ff05;
+ content:"";
+ position:absolute;
+ width:250px;
+ height:250px;
+ border:1px solid #38d9ff22;
+ border-radius:50%;
+ top:-150px;
+ left:-100px;
+ box-shadow:0 0 0 25px #38d9ff08;
 }
+
 .content{position:relative;z-index:1}
-.header{display:flex;justify-content:space-between;align-items:center}
-.brand{display:flex;align-items:center;gap:12px}
+
+.header{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+}
+
+.brand{
+ display:flex;
+ align-items:center;
+ gap:12px;
+}
+
 .logo{
- width:46px;height:46px;border-radius:14px;
- display:grid;place-items:center;
+ width:46px;
+ height:46px;
+ border-radius:14px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
  background:linear-gradient(135deg,#54e4ff,#397bff);
- color:#06111d;font-size:25px;font-weight:900;
+ color:#06111d;
+ font-size:25px;
+ font-weight:900;
 }
-.name{font-size:21px;font-weight:bold;letter-spacing:1px}
-.sub{font-size:9px;color:#91a9c4;letter-spacing:2px;margin-top:5px}
-.tag{font-size:10px;color:#54e4ff;border:1px solid #54e4ff55;padding:7px 10px;border-radius:20px}
-.title{color:#91a9c4;font-size:11px;margin-top:32px}
-.number{
- direction:ltr;text-align:left;font-size:25px;
- font-weight:bold;letter-spacing:2px;margin:13px 0 27px;
+
+.brand-name{
+ font-size:21px;
+ font-weight:bold;
+ letter-spacing:1px;
+}
+
+.brand-sub{
+ font-size:9px;
+ color:#91a9c4;
+ letter-spacing:2px;
+ margin-top:5px;
+}
+
+.tag{
+ font-size:10px;
+ color:#54e4ff;
+ border:1px solid #54e4ff55;
+ padding:7px 10px;
+ border-radius:20px;
+}
+
+.section{
+ margin-top:28px;
+}
+
+.label{
+ color:#91a9c4;
+ font-size:11px;
+ margin-bottom:10px;
+}
+
+.info-row{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px;
+}
+
+.value{
+ font-size:14px;
+ font-weight:bold;
+ overflow-wrap:anywhere;
+ min-width:0;
+}
+
+.card-number{
+ direction:ltr;
+ text-align:left;
+ font-size:21px;
+ letter-spacing:1px;
  white-space:nowrap;
 }
-.line{height:1px;background:#ffffff20;margin-bottom:22px}
-.row{
- display:flex;justify-content:space-between;
- align-items:center;gap:10px;margin:17px 0;
+
+.ltr{
+ direction:ltr;
+ text-align:left;
 }
-.info{min-width:0}
-.label{font-size:10px;color:#8da5bf;margin-bottom:7px}
-.value{font-size:13px;font-weight:bold;overflow-wrap:anywhere}
-.ltr{direction:ltr;text-align:left}
-button{
- border:1px solid #38d9ff66;background:#103047;
- color:#bcefff;border-radius:9px;padding:9px 12px;
- font-size:10px;cursor:pointer;font-family:inherit;
- white-space:nowrap;
+
+.copy-btn{
+ flex-shrink:0;
+ border:1px solid #38d9ff66;
+ background:#103047;
+ color:#bcefff;
+ border-radius:9px;
+ padding:10px 12px;
+ font-family:inherit;
+ font-size:10px;
+ cursor:pointer;
 }
-button:hover{background:#174663}
+
+.copy-btn:hover{
+ background:#174663;
+}
+
+.divider{
+ height:1px;
+ background:#ffffff20;
+ margin:23px 0;
+}
+
+.owner{
+ margin-bottom:22px;
+}
+
 .footer{
- border-top:1px solid #ffffff20;padding-top:17px;
- margin-top:23px;display:flex;justify-content:space-between;
- color:#829bb5;font-size:9px;letter-spacing:1px;
+ border-top:1px solid #ffffff20;
+ padding-top:17px;
+ margin-top:25px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ color:#829bb5;
+ font-size:9px;
+ letter-spacing:1px;
 }
-.footer strong{color:#54e4ff;font-size:13px}
+
+.footer strong{
+ color:#54e4ff;
+ font-size:13px;
+}
+
+@media(max-width:380px){
+ .card{padding:20px}
+ .card-number{font-size:17px}
+ .copy-btn{padding:9px 8px}
+ .value{font-size:12px}
+}
 </style>
 </head>
+
 <body>
 
 <div class="card">
 <div class="content">
 
-<div class="header">
+<header class="header">
  <div class="brand">
   <div class="logo">B</div>
   <div>
-   <div class="name">ByteLab</div>
-   <div class="sub">DIGITAL SERVICES</div>
+   <div class="brand-name">ByteLab</div>
+   <div class="brand-sub">DIGITAL SERVICES</div>
   </div>
  </div>
  <div class="tag">PAYMENT</div>
+</header>
+
+<div class="section owner">
+ <div class="label">نام صاحب حساب</div>
+ <div class="value" id="owner"></div>
 </div>
 
-<div class="title">شماره کارت بانکی</div>
-<div class="number" id="cardNumber"></div>
+<div class="divider"></div>
 
-<div class="line"></div>
-
-
-<div class="row">
-  <div class="info">
-    <div class="label">نام صاحب حساب</div>
-    <div class="value" id="owner"></div>
-  </div>
-</div>
-
-
-<div class="row">
-  <div class="info">
-    <div class="label">شماره کارت بانکی</div>
-    <div class="value ltr" id="cardNumber"></div>
-  </div>
-  <button onclick="copyData('cardNumber')">
-    <span>کپی شماره کارت</span>
+<div class="section">
+ <div class="label">شماره کارت بانکی</div>
+ <div class="info-row">
+  <div class="value card-number" id="cardNumber"></div>
+  <button class="copy-btn" onclick="copyCard()">
+   کپی شماره کارت
   </button>
+ </div>
 </div>
 
-<div class="row">
-  <div class="info">
-    <div class="label">شماره شبا</div>
-    <div class="value ltr" id="sheba"></div>
-  </div>
-  <button onclick="copyData('sheba')">کپی شبا</button>
+<div class="section">
+ <div class="label">شماره شبا</div>
+ <div class="info-row">
+  <div class="value ltr" id="sheba"></div>
+  <button class="copy-btn" onclick="copySheba()">
+   کپی شبا
+  </button>
+ </div>
 </div>
 
-
-<div class="footer">
+<footer class="footer">
  <span>SECURE DIGITAL PAYMENT</span>
  <strong>ByteLab.</strong>
-</div>
+</footer>
 
 </div>
 </div>
 
 <script>
-// اطلاعات بانکی خودت را اینجا وارد کن
+
+// اطلاعات بانکی را اینجا تغییر بده
+
 const PAYMENT = {
  card: "6219-8619-4462-8014",
  owner: "محمد متین افشاریان فر",
  sheba: "IR93 0560 6118 2800 5584 5511 01"
 };
 
-const card = PAYMENT.card.replace(/\D/g,"").replace(/(.{4})/g,"$1 ").trim();
+const cleanCard = PAYMENT.card.replace(/\D/g,"");
 
-document.getElementById("cardNumber").textContent = card;
-document.getElementById("owner").textContent = PAYMENT.owner;
-document.getElementById("sheba").textContent = PAYMENT.sheba;
+document.getElementById("cardNumber").textContent =
+ cleanCard.replace(/(.{4})/g,"$1 ").trim();
 
-async function copyData(id){
- const value = id === "cardNumber"
-  ? PAYMENT.card.replace(/\D/g,"")
-  : document.getElementById(id).textContent;
+document.getElementById("owner").textContent =
+ PAYMENT.owner;
 
+document.getElementById("sheba").textContent =
+ PAYMENT.sheba;
+
+async function copyText(text,button){
  try{
-  await navigator.clipboard.writeText(value);
-  alert("با موفقیت کپی شد!");
+  await navigator.clipboard.writeText(text);
+  const oldText = button.textContent;
+  button.textContent = "کپی شد ✓";
+  setTimeout(()=>{
+   button.textContent = oldText;
+  },1500);
  }catch(e){
-  alert("امکان کپی خودکار وجود ندارد.");
+  alert("امکان کپی وجود ندارد. متن را دستی انتخاب کنید.");
  }
 }
+
+function copyCard(){
+ copyText(cleanCard,event.currentTarget);
+}
+
+function copySheba(){
+ copyText(PAYMENT.sheba,event.currentTarget);
+}
+
 </script>
 
 </body>
